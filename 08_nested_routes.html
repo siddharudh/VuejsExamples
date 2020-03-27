@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nested Routes</title>
+</head>
+<body>
+<div id="app">
+    <router-link to="/user/Alice">Alice</router-link>
+    <router-link to="/user/Bob">Bob</router-link>
+    <router-link to="/user/Catherine">Catherine</router-link>
+
+    <br>
+    <br>
+    <router-view></router-view>
+</div>
+</body>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript" src="vue-router.js"></script>
+<script type="text/javascript">
+    const User = {
+        props: ['name'],
+        template: `
+        <div>
+            User: {{name}}
+            <br><br>
+            <router-link :to="{name: 'home'}">Home</router-link>
+            <router-link :to="{name: 'about'}">About</router-link>
+            <router-link :to="{name: 'blog'}">Blog</router-link>
+            <br><br>
+            <router-view/>
+        </div>`
+    }
+
+    const UserHome = {template: "<div>{{this.$route.params.name}}'s Home</div>"}
+    const UserAbout = {template: '<div>About {{this.$route.params.name}}</div>'}
+    const UserBlog = {template: "<div>{{this.$route.params.name}}'s Blog</div>"}
+
+    const router = new VueRouter({
+        routes: [
+                    {
+                        path: '/user/:name', component: User, name: "user", props: true,
+                        children: [
+                            {
+                                path: '', component: UserHome, name: 'home'
+                            },
+                            {
+                                path: 'blog', component: UserBlog, name: 'blog'
+                            },
+                            {
+                                path: 'about', component: UserAbout, name: 'about'
+                            }
+                        ]
+                    }
+                ]
+    })
+
+    const app = new Vue({
+        router
+    }).$mount('#app')
+
+</script>
+</html>

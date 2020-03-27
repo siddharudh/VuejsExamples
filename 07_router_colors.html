@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        .color-box {
+            padding: 16px;
+            margin: 0;
+            border: 1px solid black;
+            font-family: monospace;
+            font-size: 18px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <p>
+            <template v-for="color in colors" >
+                <router-link :to="'/color-box/' + color">{{color.toUpperCase()}}</router-link>
+                &nbsp;
+            </template>
+        </p>
+        <br>
+        <router-view></router-view>
+    </div>
+
+</body>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript" src="vue-router.js"></script>
+<script type="text/javascript">
+
+    const ColorBox = {
+        props: ['color'],
+        template: '<span class="color-box" :style="{backgroundColor: color}" @click="alertColorName">{{color}}</span>',
+        methods: {
+            alertColorName: function() {
+                alert('You clicked on "' + this.color + '" box.');
+            }
+        }
+    }
+
+    const router = new VueRouter({
+        routes: [
+            { path: '/color-box/:color', component: ColorBox, props: true }
+        ]
+    })
+
+    const app = new Vue({
+        router: router,
+        data: {
+            colors: ['red', 'green', 'blue', 'black', 'grey', 'purple']
+        }
+    }).$mount('#app')
+
+
+</script>
+</html>

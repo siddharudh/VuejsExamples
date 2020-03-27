@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class and Style Bindings</title>
+
+<style type="text/css">
+    .left {
+        text-align: left;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .right {
+        text-align: right;
+    }
+
+    .important {
+        font-weight: bold;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .large {
+        font-size: 32px;
+    }
+
+    .highlight {
+        background-color: yellow;
+    }
+
+</style>
+
+</head>
+<body>
+
+<div id="style">
+    <div class="left" v-bind:class="{important: classObject.important, error: classObject.error, large: classObject.large}">{{text}}</div>
+
+    <div class="center" v-bind:class="classObject">{{text}}</div>
+    <div class="center" v-bind:class="classArray">{{text}}</div>
+
+    <div class="right" v-bind:class="[classObject, highlightClass]">{{text}}</div>
+
+    <div v-bind:style="{fontFamily: fontFamily, 'font-size': fontSize + 'px', color: activeColor}">{{text}}</div>
+
+    <div v-bind:style="styleObject">{{text}}</div>
+
+</div>
+
+</body>
+
+<script type="text/javascript" src="vue.js"></script>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#style",
+        data: {
+            text: "Hello, style world!",
+
+            classObject: {
+                important: true,
+                error: false,
+                large: false
+            },
+
+            classArray: ['large'],
+
+
+            highlightClass: 'highlight',
+
+            activeColor: 'green',
+            fontSize: 20,
+            fontFamily: 'Cursive',
+
+            styleObject: {
+                color: 'brown',
+                fontSize: '26px',
+                fontFamily: 'Monospace'
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lists</title>
+</head>
+<body>
+    <div id="lists">
+        <ul>
+            <li v-for="color in colors">{{color}}</li>
+        </ul>
+        <ol>
+            <li v-for="fruit in fruits">{{fruit}}</li>
+        </ol>
+    </div>
+</body>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#lists",
+        data: {
+            colors: ['red', 'green', 'blue'],
+            fruits: ['apple', 'orange', 'banana']
+        }
+    })
+</script>
+</html>

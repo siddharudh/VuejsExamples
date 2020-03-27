@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Names Filter</title>
+</head>
+<body>
+    <div id="names">
+        <input type="text" name="filter" placeholder="Names Filter" v-model="filterText">
+        <br><br>
+        <ul>
+            <li v-for='name in filteredNames'>{{name}}</li>
+        </ul>
+        <br><br>
+
+            <div v-for='(name, index) in filteredNames2()'>{{index + 1}}. {{name}}</div>
+    </div>
+
+</body>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#names",
+        data: {
+            filterText: '',
+            names: ['Dinesh', 'Mantesh', 'Ramakrishna', 'Abhaya', 'Arun', 'Varun', 'Karthik']
+        },
+        computed: {
+            sortedNames: function() {
+                return this.names.slice().sort()
+            },
+            /* computed field results are cached and reused */
+            filteredNames: function() {
+                var filterText = this.filterText.toLowerCase()
+                return this.sortedNames.filter(function(name){
+                    return name.toLowerCase().includes(filterText)
+                })
+            }
+        },
+        methods: {
+            /* methods are executed every time they are invoked (results not cached)  */
+            filteredNames2: function() {
+                var filterText = this.filterText.toLowerCase()
+                return this.sortedNames.filter(function(name){
+                    return name.toLowerCase().includes(filterText)
+                })
+            }
+        }
+    })
+</script>
+</html>

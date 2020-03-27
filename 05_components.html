@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <style type="text/css">
+        .color-box {
+            padding: 16px;
+            margin: 4px;
+            border: 1px solid black;
+            font-family: monospace;
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div style="padding-top: 20px;" id="color-boxes">
+        <color-box v-for="c in colors" :color="c" :key="c"></color-box>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="vue.js"></script>
+
+<script type="text/javascript">
+
+    Vue.component('color-box', {
+        props: ['color'],
+        template: '<span class="color-box" v-bind:style="{backgroundColor: color}" v-on:click="alertColorName">{{color}}</span>',
+        methods: {
+            alertColorName: function() {
+                alert('You clicked on "' + this.color + '" box.');
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el: "#color-boxes",
+        data: {
+            colors: ['yellow', 'pink', 'cyan', 'lightgreen']
+        }
+    });
+</script>
+
+</html>

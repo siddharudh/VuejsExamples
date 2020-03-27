@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Router Basic</title>
+</head>
+<body>
+
+<div id="app">
+    <p>
+    <router-link to="/about">About</router-link>
+    <router-link to="/contact-us">Contact Us</router-link>
+</p>
+    <router-view></router-view>
+</div>
+
+</body>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript" src="vue-router.js"></script>
+<script type="text/javascript">
+    
+    const About = {template: '<div>About</div>'}
+    
+    const ContactUs = {template: '<div>Contact Us</div>'}
+    
+    const routes = [
+        {path: '/about', component: About},
+        {path: '/contact-us', component: ContactUs}
+    ]
+
+    const router = new VueRouter({
+        routes
+    })
+
+    const app = new Vue({
+        router: router
+    }).$mount('#app')
+
+</script>
+</html>
